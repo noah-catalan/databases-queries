@@ -1,3 +1,5 @@
+-- Diego's part -----------------------------------------------------------------------------------------------------
+
 -- Inner Join
 -- This query returns only employees who are assigned to a company (an inner join between Employee and Company).
 SELECT Employee.name AS EmployeeName, Company.name AS CompanyName
@@ -43,13 +45,21 @@ FROM Company
 LEFT JOIN Employee ON Company.id = Employee.company_id
 GROUP BY Company.name;
 
--- Having
--- This query shows companies with more than 2 employees.
-SELECT Company.name, COUNT(Employee.id) AS EmployeeCount
-FROM Company
-LEFT JOIN Employee ON Company.id = Employee.company_id
-GROUP BY Company.name
-HAVING COUNT(Employee.id) > 2;
+
+-- Noah's part ------------------------------------------------------------------------------------------------
+
+-- HAVING
+-- This query shows teachers with more than 3 students assigned to them.
+-- It uses a LEFT JOIN to include all teachers, even those without students.
+-- The COUNT function is used to count the number of students per teacher.
+-- The HAVING clause filters the results to only show teachers with more than 3 students.
+
+SELECT Teacher.name, COUNT(Student.id) AS StudentCount
+FROM Teacher
+LEFT JOIN Student ON Teacher.id = Student.teacher_id
+GROUP BY Teacher.name
+HAVING COUNT(Student.id) > 3;
+
 
 -- Exists
 -- This query checks if there are any students who are assigned to a teacher with a specific email.
@@ -60,6 +70,9 @@ WHERE EXISTS (
     FROM Teacher
     WHERE Teacher.email = 'antonia@cifpfbmoll.eu' AND Teacher.id = Student.teacher_id
 );
+
+
+
 
 -- Any
 -- This query returns students who have a teacher assigned, and the teacher's id matches any of the provided teacher ids.
@@ -78,6 +91,9 @@ WHERE teacher_id = ALL (SELECT id FROM Teacher WHERE email LIKE '%@cifpfbmoll.eu
 SELECT name, email
 INTO TeacherDetails
 FROM Teacher;
+
+
+
 
 -- Insert Into Select
 -- This query inserts data from the Employee table into a new table called EmployeeBackup.
@@ -98,5 +114,10 @@ FROM Student;
 
 -- Null Functions
 -- This query demonstrates the use of COALESCE to replace NULL values in the phone_number column with a default value.
+-- I make an update to set a few values to NULL to make the query work.
+UPDATE Student
+SET phone_number = NULL
+WHERE id IN (3, 5);
+
 SELECT name, COALESCE(phone_number, 'No phone number available') AS PhoneNumber
 FROM Student;
