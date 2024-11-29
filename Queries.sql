@@ -1,9 +1,3 @@
--- SQL JOINs
--- This query demonstrates a JOIN between the Employee and Company tables to show which employee works for which company.
-SELECT Employee.name AS EmployeeName, Company.name AS CompanyName
-FROM Employee
-JOIN Company ON Employee.company_id = Company.id;
-
 -- Inner Join
 -- This query returns only employees who are assigned to a company (an inner join between Employee and Company).
 SELECT Employee.name AS EmployeeName, Company.name AS CompanyName
