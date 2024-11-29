@@ -81,17 +81,16 @@ FROM Student
 WHERE teacher_id = ANY (SELECT id FROM Teacher WHERE email LIKE '%@cifpfbmoll.eu');
 
 -- All
--- This query returns students who have a teacher assigned, and the teacher's id matches all of the provided teacher ids.
+-- This query retrieves the name of all students from the Student table whose teacher_id matches all the distinct teacher_id values returned by the subquery.
 SELECT name
 FROM Student
-WHERE teacher_id = ALL (SELECT id FROM Teacher WHERE email LIKE '%@cifpfbmoll.eu');
+WHERE teacher_id = ALL (SELECT DISTINCT teacher_idFROM TeacherWHERE email LIKE '%@cifpfbmoll.eu');
 
 -- Select Into
--- This query creates a new table with the names and emails of all teachers.
-SELECT name, email
-INTO TeacherDetails
-FROM Teacher;
-
+-- This query creates a new table with the title the synopsis of all movies.
+SELECT title, synopsis
+INTO MovieDetails
+FROM movie ;
 
 
 
