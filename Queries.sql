@@ -16,11 +16,11 @@ SELECT Employee.name AS EmployeeName, Company.name AS CompanyName
 FROM Employee
 RIGHT JOIN Company ON Employee.company_id = Company.id;
 
--- Full Join
--- This query returns all employees and all companies. If an employee is not assigned to a company, or a company has no employees, it will show NULL.
-SELECT Employee.name AS EmployeeName, Company.name AS CompanyName
-FROM Employee
-FULL JOIN Company ON Employee.company_id = Company.id;
+-- Full Join PostgreSQL
+-- This query returns all awards and all movies. If an award is not assigned to a movie, or a movie has no awards, it will show NULL.
+SELECT a.name AS AwardName, m.title AS MovieName
+FROM award a
+FULL JOIN movie m ON a.id_movie = m.id;
 
 -- Self Join
 -- This query finds employees who work for the same company.
